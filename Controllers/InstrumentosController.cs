@@ -28,10 +28,10 @@ namespace ApiInstrumentos.Controllers
         }
 
         // GET: api/Instrumentos/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Instrumento>> GetInstrumento(int id)
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<Instrumento>> GetInstrumento(int Id)
         {
-            var instrumento = await _context.Instrumentos.FindAsync(id);
+            var instrumento = await _context.Instrumentos.FindAsync(Id);
 
             if (instrumento == null)
             {
@@ -42,10 +42,10 @@ namespace ApiInstrumentos.Controllers
         }
 
         // ex -> PUT: api/Instrumentos/5
-        [HttpPut("{id}")]
-        public async Task<IActionResult> PutInstrumento(int id, Instrumento instrumento)
+        [HttpPut("{Id}")]
+        public async Task<IActionResult> PutInstrumento(int Id, Instrumento instrumento)
         {
-            if (id != instrumento.id)
+            if (Id != instrumento.Id)
             {
                 return BadRequest();
             }
@@ -58,7 +58,7 @@ namespace ApiInstrumentos.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!InstrumentoExists(id))
+                if (!InstrumentoExists(Id))
                 {
                     return NotFound();
                 }
@@ -78,14 +78,14 @@ namespace ApiInstrumentos.Controllers
             _context.Instrumentos.Add(instrumento);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetInstrumento", new { id = instrumento.id }, instrumento);
+            return CreatedAtAction("GetInstrumento", new { Id = instrumento.Id }, instrumento);
         }
 
         // ex -> DELETE: api/Instrumentos/5
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteInstrumento(int id)
+        [HttpDelete("{Id}")]
+        public async Task<IActionResult> DeleteInstrumento(int Id)
         {
-            var instrumento = await _context.Instrumentos.FindAsync(id);
+            var instrumento = await _context.Instrumentos.FindAsync(Id);
             if (instrumento == null)
             {
                 return NotFound();
@@ -97,9 +97,9 @@ namespace ApiInstrumentos.Controllers
             return NoContent();
         }
 
-        private bool InstrumentoExists(int id)
+        private bool InstrumentoExists(int Id)
         {
-            return _context.Instrumentos.Any(e => e.id == id);
+            return _context.Instrumentos.Any(e => e.Id == Id);
         }
     }
 }
